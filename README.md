@@ -184,14 +184,17 @@ $ pig id.pig
 ```
 $ mkdir pig_data
 $ gedit student_data.txt
+```
 
-** $ hdfs dfs -mkdir /Pig_Data/
-
+> *for hdfs*
+```
+$ hdfs dfs -mkdir /Pig_Data/
 $ hdfs dfs -put student_data.txt /Pig_Data/
-
-/*for hdfs*/
 $ pig -x mapreduce 
-/*for local*/
+```
+
+> *for local*
+```
 $ pig -x local
 ```
 ###### hdfs
@@ -212,8 +215,56 @@ grunt> dump student;
 grunt> store student into 'student_data_out';
 ```
 
+## Apache Pig - Join operator
+```
+$ cd pig_data
 
+$ gedit customers.txt
+```
+> customers.txt
+```
+1,Ramesh,32,Ahmedabad,2000.00
+2,Khilan,25,Delhi,1500.00
+3,kaushik,23,Kota,2000.00
+4,Chaitali,25,Mumbai,6500.00 
+5,Hardik,27,Bhopal,8500.00
+6,Komal,22,MP,4500.00
+7,Muffy,24,Indore,10000.00
+```
 
+```
+$ gedit orders.txt
+```
+> orders.txt
+```
+102,2009-10-08 00:00:00,3,3000
+100,2009-10-08 00:00:00,3,1500
+101,2009-11-20 00:00:00,2,1560
+103,2008-05-20 00:00:00,4,2060
+```
+
+> Load data
+```
+$ cd pig_data
+$ pig -x local
+
+grunt> customers = LOAD 'customers.txt' USING PigStorage(',') as (id:int, name:chararray, age:int, address:chararray, salary:int);
+  
+grunt> orders = LOAD 'orders.txt' USING PigStorage(',') as (oid:int, date:chararray, customer_id:int, amount:int);
+```
+
+>Self Join
+```
+grunt> customers1 = LOAD 'customers.txt' USING PigStorage(',') as (id:int, name:chararray, age:int, address:chararray, salary:int);
+  
+grunt> customers2 = LOAD 'customers.txt' USING PigStorage(',') as (id:int, name:chararray, age:int, address:chararray, salary:int); 
+
+grunt> customers3 = JOIN customers1 BY id, customers2 BY id;
+
+grunt> dump customers3;
+
+grunt> store customer3 into 'cust_joined';
+```
 
 ## Apache Hive
 
