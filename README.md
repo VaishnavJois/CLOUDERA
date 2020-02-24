@@ -129,7 +129,7 @@ $ pig id.pig
 ## Apache Pig example
 
 ####  To use Hadoop MapReduce 
-
+--------------------
 ```
 $ cd /$Hadoop_Home/bin/
 $ hdfs dfs -mkdir hdfs://localhost:9000/Pig_Data
@@ -174,7 +174,10 @@ $ pig -x mapreduce
 ```
 grunt> student = LOAD 'hdfs://localhost:9000/pig_data/student_data.txt' USING PigStorage(',') as (id:int, firstname:chararray, lastname:chararray,phone:chararray, city:chararray);
 
+grunt> student = LOAD '/Pig_Data/student_data.txt' USING PigStorage(',') as (id:int, firstname:chararray, lastname:chararray,phone:chararray, city:chararray);
 
+--------------------
+## 
 
 
 
