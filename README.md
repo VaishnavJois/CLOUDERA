@@ -130,6 +130,8 @@ $ pig id.pig
 
 ####  To use Hadoop MapReduce [not working block]
 ![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+:warning:
+:x:
 >
   > ```
   > $ cd /$Hadoop_Home/bin/
