@@ -245,7 +245,6 @@ $ gedit orders.txt
 
 > Load data
 ```
-$ cd pig_data
 $ pig -x local
 
 grunt> customers = LOAD 'customers.txt' USING PigStorage(',') as (id:int, name:chararray, age:int, address:chararray, salary:int);
@@ -281,6 +280,38 @@ grunt> outer_left = JOIN customers BY id LEFT OUTER, orders BY customer_id;
 grunt> store outer_left into 'left_outer_joined';
 ```
 
+## Apache Pig - Group operator
+```
+$ cd pig_data
+$ gedit student_details.txt
+
+```
+> student_details.txt
+```
+001,Rajiv,Reddy,21,9848022337,Hyderabad
+002,siddarth,Battacharya,22,9848022338,Kolkata
+003,Rajesh,Khanna,22,9848022339,Delhi
+004,Preethi,Agarwal,21,9848022330,Pune
+005,Trupthi,Mohanthy,23,9848022336,Bhuwaneshwar
+006,Archana,Mishra,23,9848022335,Chennai
+007,Komal,Nayak,24,9848022334,trivendram
+008,Bharathi,Nambiayar,24,9848022333,Chennai
+```
+
+> Load
+```
+$ pig -x local
+
+grunt> student_details = LOAD 'student_details.txt' USING PigStorage(',') as (id:int, firstname:chararray, lastname:chararray, age:int, phone:chararray, city:chararray);
+```
+
+> Group by age
+```
+grunt> group_data = GROUP student_details by age;
+
+grunt> store group_data into 'group_by_age';
+
+```
 ## Apache Hive
 
 
