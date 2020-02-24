@@ -95,13 +95,11 @@ $ hdfs dfs -ls passwd
 ** grunt> quit;
 **
 
-#### ////To use Hadoop MapReduce, 
+#### To use Hadoop MapReduce, 
 ```
 $ pig -x mapreduce
 $ pig -x tez
 ```
-////
-
 
 /////
 /*id.pig*/
