@@ -266,6 +266,21 @@ grunt> dump customers3;
 grunt> store customers3 into 'cust_self_joined';
 ```
 
+
+>Inner Join
+```
+grunt> customer_orders = JOIN customers BY id, orders BY customer_id;
+
+grunt> store customer_orders into 'cust_inner_joined';
+```
+
+>Left outer Join
+```
+grunt> outer_left = JOIN customers BY id LEFT OUTER, orders BY customer_id;
+
+grunt> store outer_left into 'left_outer_joined';
+```
+
 ## Apache Hive
 
 
