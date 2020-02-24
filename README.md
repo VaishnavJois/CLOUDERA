@@ -139,14 +139,15 @@ $ hdfs dfs -mkdir hdfs://localhost:9000/Pig_Data
 In the local file system, create an input file student_data.txt containing data as shown below
 **
 ////////////////////////////////////
-
+> Student data
+```
 001,Rajiv,Reddy,9848022337,Hyderabad
 002,siddarth,Battacharya,9848022338,Kolkata
 003,Rajesh,Khanna,9848022339,Delhi
 004,Preethi,Agarwal,9848022330,Pune
 005,Trupthi,Mohanthy,9848022336,Bhuwaneshwar
 006,Archana,Mishra,9848022335,Chennai.
-
+```
 ////////////////////////////////////
 
 **Now, move the file from the local file system to HDFS using put command as shown below
