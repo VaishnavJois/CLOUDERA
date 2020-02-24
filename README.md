@@ -1,4 +1,4 @@
-/////chrome installation
+##### /////chrome installation
 https://www.cyberciti.biz/faq/howto-install-google-chrome-on-redhat-rhel-fedora-centos-linux/
 
 //////////
@@ -6,6 +6,8 @@ https://www.cyberciti.biz/faq/howto-install-google-chrome-on-redhat-rhel-fedora-
 http://quickstart.cloudera:80
 
 ////////////
+
+## Hadoop mapreduce demo
 
 *******Root************
 hdfs dfs -mkdir /test1/
@@ -21,6 +23,7 @@ yarn jar hadoop-mapreduce-examples.jar wordcount /test1/ss4.txt /test2/
 
 ///////////////////////
 
+### Wordcount demo
 
 javac -cp `hadoop classpath` WordCount.java
 
@@ -57,8 +60,7 @@ NOTE
 ::::test7-----war-and-peace-output
 ///////////////
 
-
-*******hadoop streaming********
+## Hadoop Streaming
 
 chmod u+x program_name
 
@@ -75,7 +77,7 @@ hadoop jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar -file .
 hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file ./mapper.py -mapper ./mapper.py -file ./reducer.py -reducer ./reducer.py -input /test6/vv.txt -output /test8
 
 
-# *********Apache Pig**************
+## *********Apache Pig**************
 
 cp /etc/passwd .
 
@@ -132,7 +134,8 @@ $ cd /$Hadoop_Home/bin/
 $ hdfs dfs -mkdir hdfs://localhost:9000/Pig_Data
 
 
-**In the local file system, create an input file student_data.txt containing data as shown below
+**
+In the local file system, create an input file student_data.txt containing data as shown below
 **
 ////////////////////////////////////
 
@@ -169,28 +172,6 @@ $ hdfs dfs -cat hdfs://localhost:9000/pig_data/student_data.txt
 $ pig -x mapreduce
 
 grunt> student = LOAD 'hdfs://localhost:9000/pig_data/student_data.txt' USING PigStorage(',') as (id:int, firstname:chararray, lastname:chararray,phone:chararray, city:chararray);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
