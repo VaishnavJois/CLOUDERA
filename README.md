@@ -51,12 +51,12 @@ gedit vv.txt
 hdfs dfs -put vv.txt /test6/
 
 hadoop jar wordcount.jar WordCount /test6/vv.txt /test7
+
+
+  hdfs dfs -ls /test7/
+
+  hdfs dfs -get /test7/part-r-00000
 ```
-
-hdfs dfs -ls /test7/
-
-hdfs dfs -get /test7/part-r-00000
-
 
 *NOTE*
 ::::test6-----war-and-peace-input
