@@ -188,17 +188,28 @@ $ gedit student_data.txt
 
 $ hdfs dfs -put student_data.txt /Pig_Data/
 
+/*for hdfs*/
 $ pig -x mapreduce 
-
+/*for local*/
+$ pig -x local
 ```
-
+###### hdfs
 ```
 grunt> student = LOAD '/Pig_Data/student_data.txt' USING PigStorage(',') as (id:int, firstname:chararray, lastname:chararray,phone:chararray, city:chararray);
 
-grunt> dump student
+grunt> dump student;
 
+grunt> store student into 'student_data_out';
 ```
 
+###### local
+```
+grunt> student = LOAD 'student_data.txt' USING PigStorage(',') as (id:int, firstname:chararray, lastname:chararray,phone:chararray, city:chararray);
+
+grunt> dump student;
+
+grunt> store student into 'student_data_out';
+```
 
 
 
