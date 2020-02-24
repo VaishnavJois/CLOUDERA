@@ -34,8 +34,8 @@ or
 javac -cp `hadoop classpath` -d wordcount_classes WordCount.java
 ```
 
-:pushpin: 
-#### hdfs dfsadmin -safemode leave
+:pushpin: hdfs dfsadmin -safemode leave
+
 
 //////////////////////////
 
