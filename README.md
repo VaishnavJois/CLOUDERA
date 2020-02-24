@@ -263,7 +263,7 @@ grunt> customers3 = JOIN customers1 BY id, customers2 BY id;
 
 grunt> dump customers3;
 
-grunt> store customer3 into 'cust_joined';
+grunt> store customers3 into 'cust_joined';
 ```
 
 ## Apache Hive
