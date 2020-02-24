@@ -128,7 +128,7 @@ $ pig id.pig
 
 ## Apache Pig example
 
-####  To use Hadoop MapReduce 
+####  To use Hadoop MapReduce [not working block]
 ~~~
 ```
 $ cd /$Hadoop_Home/bin/
@@ -213,6 +213,8 @@ grunt> store student into 'student_data_out';
 
 
 
+
+## Apache Hive
 
 
 
