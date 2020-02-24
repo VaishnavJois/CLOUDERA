@@ -28,11 +28,11 @@ yarn jar hadoop-mapreduce-examples.jar wordcount /test1/ss4.txt /test2/
 ///////////////////////
 
 ### Wordcount demo
-
+```
 javac -cp `hadoop classpath` WordCount.java
 or
 javac -cp `hadoop classpath` -d wordcount_classes WordCount.java
-
+```
 
 #### hdfs dfsadmin -safemode leave
 
@@ -40,7 +40,7 @@ javac -cp `hadoop classpath` -d wordcount_classes WordCount.java
 
 **inside wordcount_classes**
 ```
-  javac -cp /usr/lib/hadoop/\*:/usr/lib/hadoop-mapreduce/* WordCount.java
+  javac -cp /usr/lib/hadoop/*:/usr/lib/hadoop-mapreduce/* WordCount.java
   // contains library and template classes
   jar -cvf wordcount.jar *.class
 
