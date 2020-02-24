@@ -87,32 +87,32 @@ $ hdfs dfs -ls passwd
 ```
 
 #### Local Pig
-
-** $ pig -x local
-** grunt> A = load 'passwd' using PigStorage(':');
-** grunt> B = foreach A generate $0 as id;
-** grunt> dump B;
-** grunt> quit;
-**
+```
+$ pig -x local
+grunt> A = load 'passwd' using PigStorage(':');
+grunt> B = foreach A generate $0 as id;
+grunt> dump B;
+grunt> quit;
+```
 
 #### To use Hadoop MapReduce, 
 ```
 $ pig -x mapreduce
+or
 $ pig -x tez
 ```
 
-/////
-/*id.pig*/
+__*id.pig*__
 ```
 A = load 'passwd' using PigStorage(':');
 B = foreach A generate $0 as id;
 dump B;
 store B into 'id.out';
 ```
-/*end id.pig*/
-/////
+__*end id.pig*__
 
-**remove local id.out if exists
+
+*remove local id.out if exists*
 ```
 $ /bin/rm -r id.out/
 $ pig -x local id.pig
