@@ -77,7 +77,7 @@ hadoop jar /usr/hdp/current/hadoop-mapreduce-client/hadoop-streaming.jar -file .
 hadoop jar /usr/lib/hadoop-mapreduce/hadoop-streaming.jar -file ./mapper.py -mapper ./mapper.py -file ./reducer.py -reducer ./reducer.py -input /test6/vv.txt -output /test8
 
 
-## *********Apache Pig**************
+## Apache Pig
 
 cp /etc/passwd .
 
@@ -86,7 +86,7 @@ hdfs dfs -put passwd passwd
 hdfs dfs -ls passwd
 
 
-### /////Local Pig
+#### Local Pig
 
 ** $ pig -x local
 ** grunt> A = load 'passwd' using PigStorage(':');
@@ -95,7 +95,7 @@ hdfs dfs -ls passwd
 ** grunt> quit;
 **
 
-### ////To use Hadoop MapReduce, 
+#### ////To use Hadoop MapReduce, 
 $ pig -x mapreduce
 $ pig -x tez
 ////
@@ -123,12 +123,12 @@ $ pig id.pig
 
 
 
-## **Apache Pig example**
+## Apache Pig example
 
 
-### /**** To use Hadoop MapReduce ****/
+####  To use Hadoop MapReduce 
 
-#### /////
+##### /////
 
 $ cd /$Hadoop_Home/bin/
 $ hdfs dfs -mkdir hdfs://localhost:9000/Pig_Data
@@ -167,7 +167,7 @@ $ hdfs dfs -cat hdfs://localhost:9000/pig_data/student_data.txt
 */
 
 
-#### /////
+##### /////
 
 $ pig -x mapreduce
 
