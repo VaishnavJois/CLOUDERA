@@ -155,30 +155,25 @@ $ pig id.pig
   > 
   > **Now, move the file from the local file system to HDFS using put command as shown below
   > 
-  > /*
   > ```
   > $ cd $HADOOP_HOME/bin 
   > $ hdfs dfs -put /home/Hadoop/Pig/Pig_Data/student_data.txt dfs://localhost:9000/pig_data/
   > ```
-  > */
   > 
   > **You can use the cat command to verify whether the file has been moved into the HDFS, as shown below.
   > 
-  > /*
   > ```
   > $ cd $HADOOP_HOME/bin
   > $ hdfs dfs -cat hdfs://localhost:9000/pig_data/student_data.txt
   > ```
-  > */
-  > 
-  > 
-  > ##### /////
   > ```
   > $ pig -x mapreduce
+  > ```
   > ```
   > grunt> student = LOAD 'hdfs://localhost:9000/pig_data/student_data.txt' USING PigStorage(',') as (id:int, firstname:chararray, lastname:chararray,phone:chararray, city:chararray);
   > 
   > grunt> student = LOAD '/Pig_Data/student_data.txt' USING PigStorage(',') as (id:int, firstname:chararray, lastname:chararray,phone:chararray, city:chararray);
+  > ```
 
 
 
