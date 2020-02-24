@@ -3,15 +3,19 @@ https://www.cyberciti.biz/faq/howto-install-google-chrome-on-redhat-rhel-fedora-
 
 //////////
 
-http://quickstart.cloudera:80
+> Cloudera home
+> http://quickstart.cloudera:80
 
 ////////////
 
 ## Hadoop mapreduce demo
 
-*******Root************
+**Root**
+```
 hdfs dfs -mkdir /test1/
-*******Desktop command*******
+```
+**Desktop command**
+```
 gedit ss4.txt
 hdfs dfs -put ss4.txt /test1/
 hdfs dfs -ls /test1
@@ -19,26 +23,25 @@ hdfs dfs -cat /test1/ss4.txt
 hdfs dfs -get /test1/ss4.txt ss5.txt
 cd /usr/lib/hadoop-mapreduce
 yarn jar hadoop-mapreduce-examples.jar wordcount /test1/ss4.txt /test2/
-
+```
 
 ///////////////////////
 
 ### Wordcount demo
 
 javac -cp `hadoop classpath` WordCount.java
-
+or
 javac -cp `hadoop classpath` -d wordcount_classes WordCount.java
 
-sudo tar -xvf <path to .gz>
 
-hdfs dfsadmin -safemode leave
+#### hdfs dfsadmin -safemode leave
 
 //////////////////////////
 
-**inside wordcount_classes
-
-  javac -cp /usr/lib/hadoop/*:/usr/lib/hadoop-mapreduce/* WordCount.java
-/////contains library and template classes
+**inside wordcount_classes**
+```
+  javac -cp /usr/lib/hadoop/\*:/usr/lib/hadoop-mapreduce/* WordCount.java
+  // contains library and template classes
   jar -cvf wordcount.jar *.class
 
   sudo cp wordcount.jar /usr/lib/hadoop-mapreduce/
@@ -47,18 +50,18 @@ hdfs dfs -mkdir /test6
 gedit vv.txt
 hdfs dfs -put vv.txt /test6/
 
-
-  hadoop jar wordcount.jar WordCount /test6/vv.txt /test7
+hadoop jar wordcount.jar WordCount /test6/vv.txt /test7
+```
 
 hdfs dfs -ls /test7/
 
 hdfs dfs -get /test7/part-r-00000
 
-**
-NOTE
+
+*NOTE*
 ::::test6-----war-and-peace-input
 ::::test7-----war-and-peace-output
-///////////////
+
 
 ## Hadoop Streaming
 ```
