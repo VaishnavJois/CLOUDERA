@@ -313,16 +313,21 @@ grunt> store group_data into 'group_by_age';
 
 ```
 ## Apache Hive
+```
+cd Desktop
+```
+```
+hive> CREATE TABLE pokes (foo INT, bar STRING);
 
+hive> CREATE TABLE logs(t1 string, t2 string, t3 string, t4 string, t5 string, t6 string, t7 string) ROW FORMAT DELIMITED FIELDS TERMINATED BY ' ';
 
+hive> LOAD DATA LOCAL INPATH 'student/student.txt' OVERWRITE INTO TABLE logs;
 
+hive> SELECT t4 AS sev, COUNT(*) AS cnt FROM logs WHERE t4 LIKE '[%' GROUP BY t4;
 
+```
 
-
-
-
-
-
+$awk '{print $1,$2,$3}';
 
 
 
