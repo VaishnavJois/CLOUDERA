@@ -346,7 +346,7 @@ Reference:
   > http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html
  
 
-Step 1: Download and Load Sample MySQL Data
+### Step 1: Download and Load Sample MySQL Data
 ===========================================
 #### Assume mysql is installed and working on the host
 #### Ref: http://dev.mysql.com/doc/world-setup/en/index.html
@@ -379,7 +379,7 @@ Step 1: Download and Load Sample MySQL Data
    mysql> SHOW CREATE TABLE CountryLanguage;
 ```
 
-Step 2: Add Sqoop User Permissions for Local Machine and Cluster
+### Step 2: Add Sqoop User Permissions for Local Machine and Cluster
 ================================================================
 ```
    mysql> GRANT ALL PRIVILEGES ON world.* To 'sqoop'@'localhost' IDENTIFIED BY 'sqoop';
@@ -406,7 +406,7 @@ Step 2: Add Sqoop User Permissions for Local Machine and Cluster
    mysql> quit
 ```
 
-Step 3: Import Data Using Sqoop
+### Step 3: Import Data Using Sqoop
 ===============================
 
 #### Use Sqoop to List Databases
