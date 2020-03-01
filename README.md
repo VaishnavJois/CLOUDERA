@@ -423,7 +423,6 @@ sqoop list-databases --connect jdbc:mysql://localhost/world --username sqoop --p
 sqoop list-tables --connect jdbc:mysql://localhost/world --username sqoop --password sqoop
 ```
 
-
 #### Make directory for data
 ```
 hdfs dfs -mkdir sqoop-mysql-import
@@ -438,7 +437,7 @@ hdfs dfs -ls /user/hdfs/sqoop-mysql-import/country
 hdfs dfs  -cat /user/hdfs/sqoop-mysql-import/country/part-m-00000
 ```
 ### Using and Options File
-####   Can use and options file to avoid rewriting same options
+>   Can use and options file to avoid rewriting same options
 ####   Example (vi world-options.txt):
 ```
 import
@@ -450,17 +449,17 @@ sqoop
 sqoop
 ```
 ```
-sqoop  --options-file world-options.txt --table City  -m 1 --target-dir /user/hdfs/sqoop-mysql-import/city
+sqoop --options-file world-options.txt --table City -m 1 --target-dir /user/hdfs/sqoop-mysql-import/city
 ```
-#### Include a SQL Query in the Import Step
-#### If we want just cities inf Canada
-#### The $Conditions variable is needed for more than one mapper.
-#### If you want to import the results of a query in parallel, then each map task will need
-#### to execute a copy of the query, with results partitioned by bounding conditions inferred 
-#### by Sqoop. Your query must include the token $CONDITIONS which each Sqoop process will 
-#### replace with a unique condition expression based on the "--split-by" option.  
-#### You may need to select another splitting column with --split-by option if your
-#### primary key is not uniformly distributed.
+> Include a SQL Query in the Import Step
+> If we want just cities inf Canada
+> The $Conditions variable is needed for more than one mapper.
+> If you want to import the results of a query in parallel, then each map task will need
+> to execute a copy of the query, with results partitioned by bounding conditions inferred 
+> by Sqoop. Your query must include the token $CONDITIONS which each Sqoop process will 
+> replace with a unique condition expression based on the "--split-by" option.  
+> You may need to select another splitting column with --split-by option if your
+> primary key is not uniformly distributed.
 
 #### First use a single mapper "-m 1"
 ```
@@ -469,8 +468,8 @@ sqoop  --options-file world-options.txt -m 1 --target-dir /user/hdfs/sqoop-mysql
 hdfs dfs  -cat /user/hdfs/sqoop-mysql-import/canada-city/part-m-00000
 ```
 
-#### Since -m 1 is one map, we don't need to specify a --split-by option.
-#### Now use multiple mappers, clear resutls from previous import. 
+> Since -m 1 is one map, we don't need to specify a --split-by option.
+> Now use multiple mappers, clear resutls from previous import. 
 ```
 hdfs dfs -rm -r -skipTrash /user/hdfs/sqoop-mysql-import/canada-city
 
