@@ -327,7 +327,158 @@ hive> SELECT t4 AS sev, COUNT(*) AS cnt FROM logs WHERE t4 LIKE '[%' GROUP BY t4
 
 ```
 
-$awk '{print $1,$2,$3}';
+
+
+
+
+# Apache Hadoop Fundamentals
+
+LESSON 6.4 APACHE SQOOP 
+
+OS: Linux
+Platform: RHEL 6.3
+Hadoop Version: 2.4
+Hadoop Version: Hortonworks HDP 2.1
+Sqoop Version: 1.4.4
+
+Reference:
+
+  > http://sqoop.apache.org/docs/1.4.5/SqoopUserGuide.html
+ 
+
+Step 1: Download and Load Sample MySQL Data
+===========================================
+#### Assume mysql is installed and working on the host
+#### Ref: http://dev.mysql.com/doc/world-setup/en/index.html
+#### Get the database:
+
+  wget http://downloads.mysql.com/docs/world_innodb.sql.gz
+
+#### Load into MySQL
+```
+   mysql -u root -p
+   mysql> CREATE DATABASE world;
+   mysql> USE world;
+   mysql> SOURCE world_innodb.sql;
+   mysql> SHOW TABLES;
+```
+```
+   +-----------------+
+   | Tables_in_world |
+   +-----------------+
+   | City            |
+   | Country         |
+   | CountryLanguage |
+   +-----------------+
+   3 rows in set (0.01 sec)
+```
+#### To see table details:
+```
+   mysql> SHOW CREATE TABLE Country;
+   mysql> SHOW CREATE TABLE City;
+   mysql> SHOW CREATE TABLE CountryLanguage;
+```
+
+Step 2: Add Sqoop User Permissions for Local Machine and Cluster
+================================================================
+```
+   mysql> GRANT ALL PRIVILEGES ON world.* To 'sqoop'@'localhost' IDENTIFIED BY 'sqoop';
+   mysql> GRANT ALL PRIVILEGES ON world.* To 'sqoop'@'10.0.%.%' IDENTIFIED BY 'sqoop';
+   mysql> quit
+```
+#### Login as sqoop to test 
+```
+   mysql -u sqoop -p
+   mysql> USE world;
+   mysql> SHOW TABLES;
+```
+```
+   +-----------------+
+   | Tables_in_world |
+   +-----------------+
+   | City            |
+   | Country         |
+   | CountryLanguage |
+   +-----------------+
+   3 rows in set (0.01 sec)
+```
+```
+   mysql> quit
+```
+
+Step 3: Import Data Using Sqoop
+===============================
+
+#### Use Sqoop to List Databases
+```
+   sqoop list-databases --connect jdbc:mysql://localhost/world --username sqoop --password sqoop
+```
+
+  > information_schema
+  > test
+  > world
+
+#### List Tables
+```
+   sqoop list-tables --connect jdbc:mysql://localhost/world --username sqoop --password sqoop
+```
+
+
+#### Make directory for data
+```
+   hdfs dfs -mkdir sqoop-mysql-import
+```
+#### Do the import
+#### -m is number of map tasks
+```
+  sqoop import --connect jdbc:mysql://localhost/world  --username sqoop --password sqoop --table Country  -m 1 --target-dir /user/hdfs/sqoop-mysql-import/country
+
+   hdfs dfs -ls /user/hdfs/sqoop-mysql-import/country
+
+   hdfs dfs  -cat /user/hdfs/sqoop-mysql-import/country/part-m-00000
+```
+### Using and Options File
+####   Can use and options file to avoid rewriting same options
+####   Example (vi world-options.txt):
+```
+   import
+   --connect
+   jdbc:mysql://localhost/world
+   --username
+   sqoop
+   --password
+   sqoop
+```
+```
+sqoop  --options-file world-options.txt --table City  -m 1 --target-dir /user/hdfs/sqoop-mysql-import/city
+```
+#### Include a SQL Query in the Import Step
+#### If we want just cities inf Canada
+#### The $Conditions variable is needed for more than one mapper.
+#### If you want to import the results of a query in parallel, then each map task will need
+#### to execute a copy of the query, with results partitioned by bounding conditions inferred 
+#### by Sqoop. Your query must include the token $CONDITIONS which each Sqoop process will 
+#### replace with a unique condition expression based on the "--split-by" option.  
+#### You may need to select another splitting column with --split-by option if your
+#### primary key is not uniformly distributed.
+
+#### First use a single mapper "-m 1"
+```
+   sqoop  --options-file world-options.txt -m 1 --target-dir /user/hdfs/sqoop-mysql-import/canada-city --query "SELECT ID,Name from City WHERE CountryCode='CAN' AND \$CONDITIONS"
+
+   hdfs dfs  -cat /user/hdfs/sqoop-mysql-import/canada-city/part-m-00000
+```
+
+#### Since -m 1 is one map, we don't need to specify a --split-by option.
+#### Now use multiple mappers, clear resutls from previous import. 
+```
+   hdfs dfs -rm -r -skipTrash /user/hdfs/sqoop-mysql-import/canada-city
+
+   sqoop --options-file world-options.txt -m 4 --target-dir /user/hdfs/sqoop-mysql-import/canada-city --query "SELECT ID,Name from City WHERE CountryCode='CAN' AND \$CONDITIONS" --split-by ID
+
+   hdfs dfs -ls /user/hdfs/sqoop-mysql-import/canada-city
+```
+   Found 5 items
 
 
 
